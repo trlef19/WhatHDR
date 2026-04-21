@@ -78,12 +78,17 @@ data class HdrInfo(
     val description: Int
 )
 class MainActivity : ComponentActivity() {
+    object AppState {
+        var isHdrSupported: Boolean = false
+        //var hdrCapabilities: List<String> = emptyList()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
-        val isHdr = isDisplayHDR(this)
         val hdrCapabilities = getHdrTypes(this)
+        val isHdr = isDisplayHDR(this)
+        AppState.isHdrSupported = isHdr
         setContent {
             HDRApp(isHdr, hdrCapabilities,this)
         }

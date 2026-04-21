@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WhatHDR</string>
-    <string name="hlg_description">"The hybrid log–gamma transfer function is a transfer function jointly developed by the BBC and NHK for high dynamic range display. It is backward compatible with the transfer function of SDR."</string>
+    <string name="hlg_description">"The hybrid log–gamma transfer function is a transfer function jointly developed by the BBC and NHK for high dynamic range display."</string>
     <string name="dbvision_description">Dolby Vision is an advanced HDR format, using dynamic metadata to improve the image frame by frame.</string>
     <string name="hdr10_description">HDR10 is the most common, open HDR standard. It uses static metadata, which means that the brightness settings are determined once for the whole video.</string>
     <string name="hdr10plus_description">HDR10+ is an advancement of HDR10 which adds, like Dolby Vision, dynamic  metadata to enhance a scene or a frame.</string>
@@ -12,4 +12,6 @@
     <string name="hdr_notifications">HDR Notifications</string>
     <string name="this_app_uses_the_hdrsdrratio_to_check_your_display_s_hdr_status_tap_below_to_learn_more">This app uses the HdrSdrRatio to check your display\'s HDR status. Tap below to learn more.</string>
     <string name="your_device_isn_t_compatible">Your device isn\'t compatible</string>
+    <string name="tile_label">HDR Service</string>
+    <string name="unsupported_device_tile_service">Unsupported device</string>
 </resources>
