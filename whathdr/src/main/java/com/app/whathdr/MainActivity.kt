@@ -70,7 +70,7 @@ import androidx.graphics.shapes.RoundedPolygon
 import com.app.whathdr.ui.elements.ExpandableHdrItem
 import com.app.whathdr.ui.theme.AppFonts.googleFlex600
 import com.app.whathdr.ui.theme.AppFonts.robotoFlexTopBar
-import com.app.whathdr.ui.theme.Typography
+import com.app.whathdr.ui.theme.MyTypography
 import com.app.whathdr.ui.theme.WhatHDRTheme
 
 data class HdrInfo(
@@ -247,7 +247,7 @@ fun IncompatibleDevice(innerPadding: PaddingValues) {
 
                 Text(
                     text = stringResource(R.string.your_device_isn_t_compatible),
-                    style = Typography.headlineSmall.copy(
+                    style = MyTypography.headlineSmall.copy(
                         fontWeight = FontWeight.Bold,
                         textAlign = TextAlign.Center
                     ),
@@ -256,7 +256,7 @@ fun IncompatibleDevice(innerPadding: PaddingValues) {
 
                 Text(
                     text = stringResource(R.string.this_app_uses_the_hdrsdrratio_to_check_your_display_s_hdr_status_tap_below_to_learn_more),
-                    style = Typography.bodyMedium,
+                    style = MyTypography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = colorScheme.onSecondaryContainer.copy(alpha = 0.8f)
                 )
