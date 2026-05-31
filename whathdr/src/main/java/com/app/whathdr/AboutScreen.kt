@@ -1,10 +1,15 @@
 package com.app.whathdr
 
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,10 +26,13 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -43,24 +51,32 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.fastForEach
 import androidx.graphics.shapes.RoundedPolygon
 import com.app.whathdr.ui.theme.AppFonts.robotoFlexTopBar
 import com.app.whathdr.ui.theme.MyTypography
 import com.app.whathdr.ui.theme.WhatHDRTheme
 
+class AboutActivity : androidx.activity.ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent{
+            AboutScreen()
+        }
+    }
+}
+
 @Composable
-fun AboutScreen(
-    onBack: () -> Unit
-) {
+fun AboutScreen() {
     val context = LocalContext.current
 
-    // Ασφαλής ανάκτηση στοιχείων έκδοσης
     val (versionName, versionCode) = remember {
         try {
             val packageInfo = context.packageManager.getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
@@ -73,7 +89,6 @@ fun AboutScreen(
     AboutContent(
         versionName = versionName,
         versionCode = versionCode,
-        onBack = onBack
     )
 }
 
@@ -81,9 +96,16 @@ fun AboutScreen(
 @Composable
 fun AboutContent(
     versionName: String,
-    versionCode: String,
-    onBack: () -> Unit
+    versionCode: String
 ) {
+    val socialLinks = remember {
+        listOf(
+            SocialLink(R.drawable.github_icon, "https://github.com/trlef19"),
+            SocialLink(R.drawable.matrix_icon, "https://matrix.to/#/@lefteristrp24:matrix.org")
+        )
+    }
+    val uriHandler = LocalUriHandler.current
+    val activity = LocalContext.current
     WhatHDRTheme {
         Scaffold(
             topBar = {
@@ -99,7 +121,8 @@ fun AboutContent(
                         )
                     },
                     navigationIcon = {
-                        IconButton(onClick = onBack) {
+                        IconButton(onClick = {
+                            activity.startActivity(Intent(activity, MainActivity::class.java))}) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
                         }
                     }
@@ -141,6 +164,28 @@ fun AboutContent(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 VersionPill(versionName, versionCode)
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                Box(modifier = Modifier.fillMaxWidth()){
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            socialLinks.fastForEach {
+                                FilledTonalIconButton(
+                                    onClick = { uriHandler.openUri(it.url) },
+                                    shapes = IconButtonDefaults.shapes(),
+                                    modifier = Modifier.width(60.dp)
+                                ) {
+                                    Icon(
+                                        painterResource(it.icon),
+                                        null,
+                                        modifier = Modifier.size(ButtonDefaults.SmallIconSize)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
 
                 Spacer(modifier = Modifier.height(32.dp))
 
@@ -237,15 +282,14 @@ private fun VersionPill(versionName: String, versionCode: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun AboutScreen() {
+private fun AboutScreenPreview() {
     AboutContent(
         versionName = "0.0.0",
-        versionCode = "0",
-        onBack = {}
+        versionCode = "0"
     )
 }
 
 data class SocialLink(
-    val icon: ImageVector,
+    val icon: Int,
     val url: String
 )

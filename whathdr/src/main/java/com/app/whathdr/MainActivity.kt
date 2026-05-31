@@ -28,6 +28,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -35,6 +36,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Scaffold
@@ -98,6 +100,7 @@ class MainActivity : ComponentActivity() {
 @Preview(wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE)
 @Composable
 fun HDRApp(isHDR: Boolean = true, hdrCapabilities: IntArray = intArrayOf(HDR_TYPE_HDR10_PLUS, HDR_TYPE_DOLBY_VISION, HDR_TYPE_HDR10, HDR_TYPE_HLG), context: Context = LocalContext.current) {
+    val activity = LocalContext.current
     WhatHDRTheme {
         Scaffold(topBar = {
             TopAppBar(
@@ -105,7 +108,10 @@ fun HDRApp(isHDR: Boolean = true, hdrCapabilities: IntArray = intArrayOf(HDR_TYP
                     containerColor = colorScheme.primaryContainer,
                     titleContentColor = colorScheme.primary,
                 ),
-                title = { Text("WhatHDR", style = TextStyle(fontFamily = robotoFlexTopBar, fontSize = 20.sp)) }
+                title = { Text("WhatHDR", style = TextStyle(fontFamily = robotoFlexTopBar, fontSize = 20.sp)) },
+                actions = { IconButton(onClick = {
+                    activity.startActivity(Intent(activity, AboutActivity::class.java))
+                }) { Icon(Icons.Default.Info, null) } }
             )
         }
         ) { innerPadding ->

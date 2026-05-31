@@ -82,9 +82,13 @@ val MyTypography = Typography(
 
 @OptIn(ExperimentalTextApi::class)
 object AppFonts {
-    val googleFlex400 = FontFamily(Font(R.font.google_sans_flex_400))
+    val googleFlex400 = FontFamily(Font(R.font.google_sans_flex,
+        variationSettings = FontVariation.Settings(FontVariation.weight(400))
+    ))
 
-    val googleFlex600 = FontFamily(Font(R.font.google_sans_flex_600))
+    val googleFlex600 = FontFamily(Font(R.font.google_sans_flex,
+        variationSettings = FontVariation.Settings(FontVariation.weight(600))
+    ))
 
     val robotoFlexTopBar = FontFamily(Font(R.font.roboto_flex_logo))
 
@@ -94,7 +98,7 @@ object AppFonts {
             variationSettings = FontVariation.Settings(
                 // Βασικοί άξονες που υποστηρίζονται εγγενώς από το Compose
                 FontVariation.weight(900),     // Ακραίο πάχος (Super Black)
-                FontVariation.width(50f),      // Πολύ συμπιεσμένο πλάτος (Condensed)
+                FontVariation.width(30f),      // Πολύ συμπιεσμένο πλάτος (Condensed)
                 FontVariation.slant(-12f),     // Αρνητική κλίση (Backslant) για περίεργο εφέ
 
                 // Προσαρμοσμένοι άξονες (Custom Axes) μέσω του 4 γραμμάτων tag τους
