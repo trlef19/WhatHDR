@@ -4,6 +4,11 @@
 <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/LicenceGPLv3/licencegplv32.svg">
 </p>
 
+<p float="left">
+<img src="/screenshots/Screenshot_0.png?raw=true" alt="screen that appears when device is incompatible" width="300"/>
+<img src="/screenshots/Screenshot_1.png?raw=true" alt="main screen" width="300"/>
+</p>
+
 ## About
 WhatHDR is an app that notifies you when HDR content is being played on your phone.
 
