@@ -21,11 +21,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Code
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -60,6 +55,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
 import androidx.graphics.shapes.RoundedPolygon
+import com.app.whathdr.ui.icons.arrowBack
+import com.app.whathdr.ui.icons.infoIcon
+import com.app.whathdr.ui.icons.license
+import com.app.whathdr.ui.icons.person
 import com.app.whathdr.ui.theme.AppFonts.robotoFlexTopBar
 import com.app.whathdr.ui.theme.MyTypography
 import com.app.whathdr.ui.theme.WhatHDRTheme
@@ -123,7 +122,7 @@ fun AboutContent(
                     navigationIcon = {
                         IconButton(onClick = {
                             activity.startActivity(Intent(activity, MainActivity::class.java))}) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
+                            Icon(arrowBack, contentDescription = null)
                         }
                     }
                 )
@@ -191,7 +190,7 @@ fun AboutContent(
 
                 // Info Cards
                 InfoCard(
-                    icon = Icons.Default.Person,
+                    icon = person,
                     label = "Developer",
                     value = "Lefteris T."
                 )
@@ -199,7 +198,7 @@ fun AboutContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 InfoCard(
-                    icon = Icons.Default.Code,
+                    icon = license,
                     label = "License",
                     value = "GPL-3 License"
                 )
@@ -207,7 +206,7 @@ fun AboutContent(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 InfoCard(
-                    icon = Icons.Default.Info,
+                    icon = infoIcon,
                     label = "Description",
                     value = "An app that informs you whenever HDR content is being played on your device."
                 )

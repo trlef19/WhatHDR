@@ -25,11 +25,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowForward
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -70,6 +65,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.graphics.shapes.RoundedPolygon
 import com.app.whathdr.ui.elements.ExpandableHdrItem
+import com.app.whathdr.ui.icons.arrowForward
+import com.app.whathdr.ui.icons.check
+import com.app.whathdr.ui.icons.infoIcon
+import com.app.whathdr.ui.icons.warning
 import com.app.whathdr.ui.theme.AppFonts.googleFlex600
 import com.app.whathdr.ui.theme.AppFonts.robotoFlexTopBar
 import com.app.whathdr.ui.theme.MyTypography
@@ -82,7 +81,6 @@ data class HdrInfo(
 class MainActivity : ComponentActivity() {
     object AppState {
         var isHdrSupported: Boolean = false
-        //var hdrCapabilities: List<String> = emptyList()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
@@ -111,7 +109,7 @@ fun HDRApp(isHDR: Boolean = true, hdrCapabilities: IntArray = intArrayOf(HDR_TYP
                 title = { Text("WhatHDR", style = TextStyle(fontFamily = robotoFlexTopBar, fontSize = 20.sp)) },
                 actions = { IconButton(onClick = {
                     activity.startActivity(Intent(activity, AboutActivity::class.java))
-                }) { Icon(Icons.Default.Info, null) } }
+                }) { Icon(infoIcon, null) } }
             )
         }
         ) { innerPadding ->
@@ -191,9 +189,10 @@ fun HdrList(innerPadding: PaddingValues, hdrCapabilities: IntArray, context: Con
                         haptic.performHapticFeedback(HapticFeedbackType.ContextClick)
                         val intent = Intent(context, HDRService::class.java)
 
-                        if (isChecked) intent.action =
-                            HDRService.Actions.START.toString()
-                        else intent.action = HDRService.Actions.STOP.toString()
+                        if (isChecked)
+                            intent.action = HDRService.Actions.START.toString()
+                        else
+                            intent.action = HDRService.Actions.STOP.toString()
 
                         context.startService(intent)
                     },
@@ -212,7 +211,7 @@ fun HdrList(innerPadding: PaddingValues, hdrCapabilities: IntArray, context: Con
                 Switch(checked = checked, onCheckedChange = null, thumbContent = {
                     if (checked) {
                         Icon(
-                            imageVector = Icons.Filled.Check,
+                            imageVector = check,
                             contentDescription = null,
                             modifier = Modifier.size(SwitchDefaults.IconSize),
                         )}
@@ -245,7 +244,7 @@ fun IncompatibleDevice(innerPadding: PaddingValues) {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Rounded.WarningAmber,
+                    imageVector = warning,
                     contentDescription = null,
                     modifier = Modifier.size(48.dp),
                     tint = colorScheme.onSecondaryContainer
@@ -271,7 +270,7 @@ fun IncompatibleDevice(innerPadding: PaddingValues) {
                 TextButton(onClick = { uriHandler.openUri(uri)}) {
                     Text("Learn more")
                     Icon(
-                        imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
+                        imageVector = arrowForward,
                         contentDescription = null,
                         modifier = Modifier
                             .padding(start = 8.dp)
