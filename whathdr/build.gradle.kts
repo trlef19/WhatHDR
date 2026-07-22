@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.material3:material3:1.5.0-alpha23")
+    implementation("androidx.compose.material3:material3:1.5.0-alpha24")
     implementation("androidx.compose.ui:ui-tooling-preview:1.11.4")
     implementation("androidx.compose.ui:ui:1.11.4")
     implementation("com.google.accompanist:accompanist-flowlayout:0.36.0")

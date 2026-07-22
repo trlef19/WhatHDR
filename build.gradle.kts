@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:9.2.1")
+        classpath("com.android.tools.build:gradle:9.3.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.10")
         classpath("com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:14.2.1")
     }
