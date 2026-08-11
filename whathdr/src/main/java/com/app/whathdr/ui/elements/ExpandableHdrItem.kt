@@ -5,9 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -28,6 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.app.whathdr.HdrInfo
+import com.app.whathdr.ui.icons.expandLess
+import com.app.whathdr.ui.icons.expandMore
 import com.app.whathdr.ui.theme.AppFonts.googleFlex600
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
@@ -50,17 +49,22 @@ fun ExpandableHdrItem(hdrInfo: HdrInfo) {
             modifier = Modifier.fillMaxWidth()
         ) {
             ListItem(
-                headlineContent = {
-                    Text(text = hdrInfo.name, style = TextStyle(fontFamily = googleFlex600))
-                },
+                modifier = Modifier,
+                leadingContent = null,
                 trailingContent = {
-                        Icon(
-                            if (isExpanded) Icons.Filled.ExpandLess
-                            else Icons.Filled.ExpandMore,
-                            contentDescription = if (isExpanded) "Collapse" else "Expand"
-                        )
-                },
-                colors = ListItemDefaults.colors(containerColor = Color.Transparent)
+                                    Icon(
+                                        if (isExpanded) expandMore
+                                        else expandLess,
+                                        contentDescription = if (isExpanded) "Collapse" else "Expand"
+                                    )
+                            },
+                overlineContent = null,
+                supportingContent = null,
+                colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                elevation = ListItemDefaults.elevation(ListItemDefaults.Elevation),
+                content = {
+                                Text(text = hdrInfo.name, style = TextStyle(fontFamily = googleFlex600))
+                            },
             )
             if (isExpanded) {
                 Text(
