@@ -520,7 +520,7 @@ val expandLess: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(12f, 15.5f)
                         lineTo(16.5f, 11f)
@@ -569,7 +569,7 @@ val expandLess: ImageVector
 private var _expand_circle_down: ImageVector? = null
 
 @Suppress("CheckReturnValue")
-public val expandMore: ImageVector
+val expandMore: ImageVector
     get() {
         if (_expand_circle_up != null) {
             return _expand_circle_up!!
@@ -592,7 +592,7 @@ public val expandMore: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(8.93f, 14.4f)
                         lineTo(12f, 11.33f)
