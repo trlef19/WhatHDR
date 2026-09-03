@@ -106,7 +106,7 @@ fun WhatHDRTheme(
 
     MaterialExpressiveTheme(
         colorScheme = colorScheme,
-        typography = TYPOGRAPHY,
+        typography = MyTypography,
         motionScheme = MotionScheme.expressive(),
         content = content
     )
