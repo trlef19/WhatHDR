@@ -107,16 +107,12 @@ fun HDRApp(isHDR: Boolean = true, hdrCapabilities: IntArray = intArrayOf(HDR_TYP
                 title = { Text("WhatHDR", style = TextStyle(fontFamily = robotoFlexTopBar, fontSize = 20.sp)) },
                 actions = { IconButton(onClick = {
                     activity.startActivity(Intent(activity, AboutActivity::class.java))
-                }) { Icon(infoIcon, null) } }
+                }) { Icon(infoIcon, "About the app") } }
             )
         }
         ) { innerPadding ->
-            if(isHDR) {
-                HdrList(innerPadding, hdrCapabilities, context)
-            }
-            else{
-                IncompatibleDevice(innerPadding)
-            }
+            if(isHDR) HdrList(innerPadding, hdrCapabilities, context)
+            else IncompatibleDevice(innerPadding)
         }
     }
 }
@@ -167,12 +163,11 @@ fun HdrList(innerPadding: PaddingValues, hdrCapabilities: IntArray, context: Con
     val haptic = LocalHapticFeedback.current
     Column(modifier = Modifier
         .padding(innerPadding)
-        .padding(horizontal = 16.dp)
         .padding(bottom = 16.dp)
         .fillMaxSize(),verticalArrangement = Arrangement.SpaceBetween) {
-        Column {
-            hdrTypesAvailable(hdrCapabilities).forEach { hdrInfo ->
-                ExpandableHdrItem(hdrInfo = hdrInfo)
+        Column(Modifier.padding(10.dp)) {
+            hdrTypesAvailable(hdrCapabilities).forEachIndexed { index, hdrInfo ->
+                ExpandableHdrItem(index, hdrCapabilities.size, hdrInfo)
             }
         }
         var checked by remember { mutableStateOf(HDRService.isRunning) }
@@ -180,6 +175,7 @@ fun HdrList(innerPadding: PaddingValues, hdrCapabilities: IntArray, context: Con
         ElevatedCard(
             modifier = Modifier
                 .padding(vertical = 4.dp)
+                .padding(horizontal = 16.dp)
                 .toggleable(
                     value = checked,
                     onValueChange = { isChecked ->
