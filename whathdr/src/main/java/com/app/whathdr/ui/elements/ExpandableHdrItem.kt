@@ -38,6 +38,7 @@ fun ExpandableHdrItem(index: Int, totalItems: Int, hdrInfo: HdrInfo) {
     SegmentedListItem(
         modifier = Modifier.fillMaxWidth()
             .animateContentSize()
+            .padding(bottom = 4.dp)
             .clickable {
                 isExpanded = !isExpanded
                 haptic.performHapticFeedback(HapticFeedbackType.SegmentTick)
